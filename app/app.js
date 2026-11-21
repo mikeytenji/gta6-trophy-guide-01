@@ -148,6 +148,20 @@ function renderGuide() {
   s.className = 'guide-source';
   s.textContent = `Source: ${t.source}`;
   guideEl.append(g, s);
+  if (t.cite) {
+    const c = document.createElement('div');
+    c.className = 'guide-cite' + (hiddenSpoiler ? ' blurred' : '');
+    if (hiddenSpoiler) c.style.cssText = 'filter: blur(4px); user-select: none;';
+    c.textContent = t.cite;
+    guideEl.append(c);
+  }
+  if (t.detail) {
+    const dt = document.createElement('div');
+    dt.className = 'guide-detail' + (hiddenSpoiler ? ' blurred' : '');
+    if (hiddenSpoiler) dt.style.cssText = 'filter: blur(4px); user-select: none;';
+    dt.textContent = t.detail;
+    guideEl.append(dt);
+  }
 }
 
 function renderRoadmap() {

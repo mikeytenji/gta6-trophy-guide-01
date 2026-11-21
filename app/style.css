@@ -98,6 +98,9 @@ button:hover { background: #39434f; }
 .guide-panel .guide-text { margin: 0 0 12px; }
 .guide-missable { color: var(--missable); font-weight: 700; display: block; margin-bottom: 10px; }
 .guide-source { margin-top: 16px; padding-top: 10px; border-top: 1px solid var(--border); font-style: italic; color: var(--text-dim); font-size: .88rem; }
+.guide-cite { margin-top: 6px; font-style: italic; color: var(--text-dim); font-size: .8rem; line-height: 1.35; }
+.guide-detail { margin-top: 8px; padding: 6px 8px; border-left: 3px solid var(--platinum); background: var(--surface2); color: var(--text); font-size: .85rem; line-height: 1.4; }
+.guide-cite.blurred, .guide-detail.blurred { filter: blur(4px); user-select: none; }
 .guide-empty { color: var(--text-dim); text-align: center; margin-top: 40px; }
 .roadmap { background: #11151b; padding: 20px; border-top: 2px solid var(--border); }
 .roadmap h2 { margin: 0 0 4px; }
