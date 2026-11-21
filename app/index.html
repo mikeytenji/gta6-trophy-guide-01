@@ -1,25 +1,69 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
+<title>Leonida Platinum Desk — GTA 6 Trophy Guide &amp; Tracker</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
+<header class="top">
+  <h1>LEONIDA PLATINUM DESK — GTA 6 Trophy Guide &amp; Tracker</h1>
+  <p class="sub">Grand Theft Auto VI &middot; PlayStation 5 &middot; 55 trophies &middot; offline guide, no account needed</p>
+  <div class="totals">
+    <span id="earned-count">0 / 55 earned</span>
+    <span id="percent">0%</span>
+    <div class="progress" role="progressbar" aria-label="Trophies earned"><div id="progress-fill"></div></div>
+  </div>
 </header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
+
+<section class="toolbar" aria-label="Filters">
+  <input id="search" type="search" placeholder="Search trophies…" aria-label="Search trophies">
+  <div class="filters" id="filters" role="group" aria-label="Category filters">
+    <button data-filter="all" class="active">All</button>
+    <button data-filter="story">Story</button>
+    <button data-filter="activities">Activities</button>
+    <button data-filter="collectibles">Collectibles</button>
+    <button data-filter="missable">Missable</button>
+    <button data-filter="platinum-path">Platinum path</button>
+  </div>
+  <label class="grade-label">Grade
+    <select id="grade" aria-label="Filter by grade">
+      <option value="all">All grades</option>
+      <option value="platinum">Platinum</option>
+      <option value="gold">Gold</option>
+      <option value="silver">Silver</option>
+      <option value="bronze">Bronze</option>
+    </select>
+  </label>
+  <label class="spoiler-label"><input type="checkbox" id="spoiler"> Hide hidden trophies</label>
+  <button id="export">Export</button>
+  <button id="import-btn">Import</button>
+  <input type="file" id="import-file" accept="application/json" hidden>
+</section>
+
+<main class="layout">
+  <section class="list-col" aria-label="Trophy list">
+    <p id="shown-count" class="shown-count"></p>
+    <ul id="list" class="trophy-list"></ul>
+  </section>
+  <aside class="guide-col" aria-label="Guide panel">
+    <div id="guide" class="guide-panel">
+      <p class="guide-empty">Click a trophy to see its guide here.</p>
+    </div>
+  </aside>
+</main>
+
+<section id="roadmap" class="roadmap" aria-label="Platinum roadmap">
+  <h2>Platinum Roadmap</h2>
+  <p class="roadmap-intro">Five phases, in order. Finish each phase before moving on — the missable trophies in phase 1 cannot be earned later.</p>
+  <ol id="roadmap-list" class="roadmap-list"></ol>
+</section>
+
+<footer class="foot">
+  <p>Leonida Platinum Desk — offline trophy guide &amp; tracker for GTA 6 on PS5. Progress is saved in your browser only.</p>
+</footer>
+
 <script type="module" src="app.js"></script>
 </body>
 </html>

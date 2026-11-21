@@ -1,7 +1,119 @@
-body { font-family: Arial, sans-serif; margin: 24px; color: #222; }
-header { display: flex; justify-content: space-between; align-items: baseline; }
-.controls { display: flex; gap: 16px; margin: 12px 0; align-items: center; }
-.import input { font-size: 12px; }
-table { border-collapse: collapse; width: 100%; }
-th, td { border-bottom: 1px solid #ddd; padding: 6px 8px; text-align: left; vertical-align: top; white-space: pre-line; }
-th { background: #f2f2f2; }
+:root {
+  --bg: #0e1116;
+  --surface: #171c24;
+  --surface2: #1f2631;
+  --text: #e8ecf1;
+  --text-dim: #9aa7b5;
+  --border: #2c3644;
+  --platinum: #7ee0ff;
+  --gold: #ffd23f;
+  --silver: #cfd6dd;
+  --bronze: #e09a5a;
+  --story: #6aa9ff;
+  --activities: #3ecf7a;
+  --collectibles: #c07bf0;
+  --combat: #ff6b5e;
+  --online: #f1c40f;
+  --misc: #95a5a6;
+  --missable: #ff4757;
+  --accent: #2c3e50;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.45;
+}
+.top {
+  background: #000;
+  padding: 14px 20px 12px;
+  border-bottom: 2px solid var(--border);
+}
+.top h1 { margin: 0 0 4px; font-size: 1.25rem; letter-spacing: 1px; text-transform: uppercase; }
+.sub { margin: 0 0 10px; color: var(--text-dim); font-size: .9rem; }
+.totals { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.totals span { font-weight: 700; }
+.progress {
+  flex: 1; min-width: 200px; height: 12px;
+  background: #2a323e; border-radius: 6px; overflow: hidden;
+}
+#progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--silver), var(--platinum));
+  transition: width .3s ease;
+}
+.toolbar {
+  background: var(--surface);
+  padding: 10px 20px;
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+}
+input[type="search"], select, button {
+  background: #2a323e; border: 1px solid #444f5e; color: #fff;
+  padding: 6px 10px; border-radius: 4px; font-size: .9rem;
+}
+input[type="search"] { min-width: 200px; }
+button { cursor: pointer; }
+button:hover { background: #39434f; }
+.filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.filters button.active { background: var(--accent); border-color: var(--platinum); }
+.grade-label, .spoiler-label { font-size: .9rem; color: var(--text-dim); display: flex; gap: 6px; align-items: center; }
+.layout { display: flex; gap: 0; align-items: stretch; }
+.list-col { flex: 2; min-width: 0; padding: 0 0 16px; }
+.shown-count { margin: 10px 20px 4px; color: var(--text-dim); font-size: .85rem; }
+.trophy-list { list-style: none; margin: 0; padding: 0; }
+.trophy-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 8px 16px; border-bottom: 1px solid var(--border); cursor: pointer;
+}
+.trophy-row:hover { background: #1a2029; }
+.trophy-row.selected { background: #232b36; border-left: 4px solid var(--platinum); }
+.trophy-row.earned .trophy-name { text-decoration: line-through; color: var(--text-dim); }
+.trophy-info { flex: 1; min-width: 0; }
+.trophy-name { font-weight: 700; font-size: 1rem; }
+.trophy-desc { font-size: .85rem; color: var(--text-dim); }
+.trophy-desc.blurred { filter: blur(4px); user-select: none; }
+.chip {
+  font-size: .68rem; padding: 2px 7px; border-radius: 10px;
+  text-transform: uppercase; font-weight: 700; white-space: nowrap;
+}
+.chip.grade-platinum { background: var(--platinum); color: #000; }
+.chip.grade-gold { background: var(--gold); color: #000; }
+.chip.grade-silver { background: var(--silver); color: #000; }
+.chip.grade-bronze { background: var(--bronze); color: #000; }
+.chip.cat-story { border: 1px solid var(--story); color: var(--story); }
+.chip.cat-activities { border: 1px solid var(--activities); color: var(--activities); }
+.chip.cat-collectibles { border: 1px solid var(--collectibles); color: var(--collectibles); }
+.chip.cat-combat { border: 1px solid var(--combat); color: var(--combat); }
+.chip.cat-online { border: 1px solid var(--online); color: var(--online); }
+.chip.cat-misc { border: 1px solid var(--misc); color: var(--misc); }
+.chip.missable-flag { background: var(--missable); color: #fff; }
+.earned-box { width: 18px; height: 18px; accent-color: var(--platinum); flex: none; cursor: pointer; }
+.guide-col { flex: 1; min-width: 280px; background: var(--surface); border-left: 1px solid var(--border); }
+.guide-panel { padding: 18px 20px; position: sticky; top: 0; }
+.guide-panel h2 { margin: 0 0 6px; color: var(--platinum); font-size: 1.15rem; }
+.guide-panel .guide-desc { color: var(--text-dim); font-size: .92rem; margin: 0 0 12px; }
+.guide-panel .guide-text { margin: 0 0 12px; }
+.guide-missable { color: var(--missable); font-weight: 700; display: block; margin-bottom: 10px; }
+.guide-source { margin-top: 16px; padding-top: 10px; border-top: 1px solid var(--border); font-style: italic; color: var(--text-dim); font-size: .88rem; }
+.guide-empty { color: var(--text-dim); text-align: center; margin-top: 40px; }
+.roadmap { background: #11151b; padding: 20px; border-top: 2px solid var(--border); }
+.roadmap h2 { margin: 0 0 4px; }
+.roadmap-intro { color: var(--text-dim); margin: 0 0 14px; font-size: .92rem; }
+.roadmap-list { margin: 0; padding-left: 22px; }
+.roadmap-phase { margin-bottom: 14px; }
+.roadmap-phase > h3 { margin: 0 0 4px; font-size: 1rem; border-bottom: 1px solid #2c3644; padding-bottom: 4px; }
+.roadmap-phase p { margin: 2px 0; font-size: .9rem; }
+.roadmap-phase .missable-note { color: var(--missable); font-weight: 700; font-size: .82rem; }
+.foot { padding: 12px 20px; color: var(--text-dim); font-size: .85rem; border-top: 1px solid var(--border); }
+.foot p { margin: 0; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+@media (max-width: 800px) {
+  .layout { flex-direction: column; }
+  .guide-col { border-left: none; border-top: 1px solid var(--border); }
+  .guide-panel { position: static; }
+}
